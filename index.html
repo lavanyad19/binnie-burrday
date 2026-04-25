@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Binnie 💙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg,#ffd6e8,#cde7ff);
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* PAGE */
+.page { display:none; min-height:100vh; padding:60px 20px; position:relative;}
+.active { display:block; }
+
+/* TITLE */
+h1 {
+  color:#ff4d8d;
+  font-size:36px;
+  text-shadow:0 0 12px #ff9ec9;
+}
+
+/* TEXT */
+.text {
+  max-width:700px;
+  margin:20px auto;
+  font-size:20px;
+  line-height:1.8;
+  z-index:2;
+  position:relative;
+}
+
+/* BUTTON */
+button {
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff6fa5;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 15px #ff9ec9;
+}
+
+/* FLOAT MESSAGES */
+.float {
+  position:absolute;
+  font-size:14px;
+  background:white;
+  padding:6px 12px;
+  border-radius:15px;
+  animation: float 4s infinite ease-in-out;
+}
+@keyframes float {
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+  100%{transform:translateY(0);}
+}
+
+/* HEARTS */
+.heart {
+  position:absolute;
+  font-size:26px;
+  cursor:pointer;
+}
+.heart:hover { transform:scale(1.4); }
+
+/* GIFT */
+.gift {
+  font-size:50px;
+  cursor:pointer;
+  margin-top:20px;
+  animation: float 3s infinite;
+}
+
+/* POPUP */
+.popup {
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+.show { transform:translate(-50%,-50%) scale(1); }
+
+/* CONFETTI */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="c"></canvas>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+<h1>Happiee Burrdayyy, Binnie 💙</h1>
+<div class="text" id="t1"></div>
+
+<!-- floating msgs -->
+<div class="float" style="top:20%;left:10%">you + me forever 💅</div>
+<div class="float" style="top:60%;right:10%">4 years?? 😭</div>
+<div class="float" style="bottom:20%;left:15%">still not bored of you 😌</div>
+
+<!-- hearts -->
+<div class="heart" style="top:50%;left:8%" onclick="pop('You’re my comfort person 💙')">💙</div>
+<div class="heart" style="top:70%;right:10%" onclick="pop('Best decision ever 😌')">💖</div>
+
+<br>
+<button onclick="go(2)">Next ➜</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<h1>You Mean Everything 💫</h1>
+<div class="text" id="t2"></div>
+
+<div class="float" style="top:30%;left:10%">emotional support human 🫶</div>
+<div class="float" style="bottom:20%;right:10%">why so perfect 😭</div>
+<div class="float" style="top:70%;left:20%">my safe place 💙</div>
+
+<div class="heart" style="top:50%;left:10%" onclick="pop('You stayed through everything 😭')">💘</div>
+
+<br>
+<button onclick="go(3)">Next ➜</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<h1>Forever Us 💌</h1>
+<div class="text" id="t3"></div>
+
+<div class="float" style="top:25%;left:10%">no escape 😌</div>
+<div class="float" style="bottom:20%;right:10%">stuck with me 🤝</div>
+<div class="float" style="top:65%;right:20%">always you 💖</div>
+
+<div class="heart" style="top:50%;right:10%" onclick="pop('You’re irreplaceable 💙')">💖</div>
+
+<!-- 🎁 GIFT -->
+<div class="gift" onclick="openGift()">🎁</div>
+
+<br>
+<button onclick="bigConfetti()">Celebrate 🎉</button>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<p id="msg"></p>
+<button onclick="closePop()">Close</button>
+</div>
+
+<script>
+
+/* NAV */
+function go(n){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('p'+n).classList.add('active');
+}
+
+/* TYPEWRITER */
+function type(id,text){
+let i=0;
+let el=document.getElementById(id);
+el.innerHTML="";
+function t(){
+if(i<text.length){
+el.innerHTML+=text[i];
+i++;
+setTimeout(t,20);
+}}
+t();
+}
+
+/* TEXT */
+type("t1","It all started with a simple hi… and somehow you became one of the most important people in my life 🥹💙\n\nI never expected something so random to turn into something this meaningful.");
+
+setTimeout(()=>type("t2","You stayed through my chaos, moods, everything… and that means more than words 💫\n\nYou make life feel lighter just by being in it."),1500);
+
+setTimeout(()=>type("t3","You’re my safe place, my comfort, my person 💌\n\nI hope this year gives you everything you deserve because you deserve the absolute best 💙"),3000);
+
+/* POPUP */
+function pop(m){
+document.getElementById("msg").innerText=m;
+document.getElementById("popup").classList.add("show");
+}
+function closePop(){
+document.getElementById("popup").classList.remove("show");
+}
+
+/* 🎁 GIFT LETTER */
+function openGift(){
+pop("Surprise 💌\n\nYou’re one of the best things that ever happened to me. I mean that. No matter what happens, I’ll always be grateful that you came into my life 💙");
+burst(window.innerWidth/2,window.innerHeight/2);
+}
+
+/* CONFETTI */
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let confetti=[];
+
+function create(x,y,count){
+for(let i=0;i<count;i++){
+confetti.push({
+x:x||Math.random()*canvas.width,
+y:y||Math.random()*canvas.height,
+r:Math.random()*6,
+d:Math.random()*5,
+c:`hsl(${Math.random()*360},100%,70%)`
+});
+}
+}
+
+function burst(x,y){
+create(x,y,80);
+}
+
+function bigConfetti(){
+create(null,null,300);
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+confetti.forEach(c=>{
+ctx.beginPath();
+ctx.arc(c.x,c.y,c.r,0,6.28);
+ctx.fillStyle=c.c;
+ctx.fill();
+c.y+=c.d;
+if(c.y>canvas.height) c.y=0;
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+</script>
+
+</body>
+</html>
